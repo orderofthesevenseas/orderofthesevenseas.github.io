@@ -289,9 +289,9 @@ footer small{font-size:.8rem}
     <div class="cta">
       <a class="btn btn-gold" href="#apply">Fill Out the Application</a>
       <a class="btn btn-line" href="APPLICATION-FOR-MEMBERSHIP.pdf" download>Download Form (PDF)</a>
-      <a class="btn btn-line" href="mailto:orderofthesevenseas@gmail.com?subject=Membership%20Inquiry">Email Us Instead</a>
+      <a class="btn btn-line" href="mailto:orderofthesevenseas.ph@gmail.com?subject=Membership%20Inquiry">Email Us Instead</a>
     </div>
-    <p style="margin:22px 0 0;font-size:.9rem">Or write to us directly: <a href="mailto:orderofthesevenseas@gmail.com" style="color:var(--gold-hi);font-weight:600">orderofthesevenseas@gmail.com</a></p>
+    <p style="margin:22px 0 0;font-size:.9rem">Or write to us directly: <a href="mailto:orderofthesevenseas.ph@gmail.com" style="color:var(--gold-hi);font-weight:600">orderofthesevenseas.ph@gmail.com</a></p>
   </div>
 </section>
 
@@ -299,10 +299,10 @@ footer small{font-size:.8rem}
   <div class="wrap">
     <div class="head rv"><div class="eyebrow">Sail As One &bull; Character &bull; Discipline &bull; Service &bull; Brotherhood &bull; Truth</div><h2>Application for Membership</h2><div class="rule">&#9875;</div></div>
     <div class="fcard rv" style="text-align:center;margin-bottom:22px;padding:26px 24px;border-top-width:4px">
-      <p style="color:var(--muted);margin-bottom:14px">Prefer to fill it out on paper or on your own device? Download the official form, complete it, and email it to <a href="mailto:orderofthesevenseas@gmail.com?subject=Membership%20Application" style="color:var(--navy-800);font-weight:600">orderofthesevenseas@gmail.com</a>.</p>
+      <p style="color:var(--muted);margin-bottom:14px">Prefer to fill it out on paper or on your own device? Download the official form, complete it, and email it to <a href="mailto:orderofthesevenseas.ph@gmail.com?subject=Membership%20Application" style="color:var(--navy-800);font-weight:600">orderofthesevenseas.ph@gmail.com</a>.</p>
       <a class="btn btn-gold" href="APPLICATION-FOR-MEMBERSHIP.pdf" download>&#11015; Download Application Form (PDF)</a>
     </div>
-    <form class="fcard rv" id="applyForm" action="https://formsubmit.co/orderofthesevenseas@gmail.com" method="POST">
+    <form class="fcard rv" id="applyForm" action="https://formsubmit.co/orderofthesevenseas.ph@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New Membership Application - Order of the Seven Seas">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -384,7 +384,7 @@ footer small{font-size:.8rem}
   <div class="wrap">
     <div class="head rv"><div class="eyebrow">Get in Touch</div><h2>Contact</h2><div class="rule">&#9993;</div></div>
     <div class="contact-grid">
-      <div class="ccard rv"><div class="ic">&#9993;</div><h3>EMAIL</h3><a href="mailto:orderofthesevenseas@gmail.com">orderofthesevenseas@gmail.com</a></div>
+      <div class="ccard rv"><div class="ic">&#9993;</div><h3>EMAIL</h3><a href="mailto:orderofthesevenseas.ph@gmail.com">orderofthesevenseas.ph@gmail.com</a></div>
       <div class="ccard rv"><div class="ic">&#128205;</div><h3>LOCATION</h3><p>Cebu, Philippines</p></div>
       <div class="ccard rv"><div class="ic">&#128172;</div><h3>FACEBOOK</h3><a href="https://www.facebook.com/share/1EmkndUJoc/" target="_blank" rel="noopener">Fraternal Order of the Seven Seas - FOSS</a></div>
     </div>
@@ -422,7 +422,7 @@ footer small{font-size:.8rem}
       e.preventDefault();
       if(!f.checkValidity()){f.reportValidity();return}
       b.disabled=true;b.textContent='Sending...';st.className='fstatus';st.textContent='';
-      fetch('https://formsubmit.co/ajax/orderofthesevenseas@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      fetch('https://formsubmit.co/ajax/orderofthesevenseas.ph@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
         .then(function(r){if(!r.ok)throw new Error('fail');return r.json()})
         .then(function(){
           f.reset();f.elements['Date Signed'].value=d.getFullYear()+'-'+m+'-'+dd;
@@ -431,7 +431,7 @@ footer small{font-size:.8rem}
         })
         .catch(function(){
           st.className='fstatus err';
-          st.innerHTML='Sorry, your application could not be sent. Please try again, or email us directly at <a href="mailto:orderofthesevenseas@gmail.com?subject=Membership%20Application">orderofthesevenseas@gmail.com</a>.';
+          st.innerHTML='Sorry, your application could not be sent. Please try again, or email us directly at <a href="mailto:orderofthesevenseas.ph@gmail.com?subject=Membership%20Application">orderofthesevenseas.ph@gmail.com</a>.';
         })
         .finally(function(){b.disabled=false;b.textContent='Submit Application'});
     });
