@@ -2,74 +2,277 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FOSS - Fraternal Order of the Seven Seas</title>
-<!-- PREMIUM FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cinzel+Decorative:wght@700&family=Montserrat:wght@400;700;900&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FOSS – Fraternal Order of the Seven Seas | Sail As One</title>
+<meta name="description" content="The Fraternal Order of the Seven Seas (FOSS): a maritime brotherhood anchored in compassion, humility, integrity, and service. Est. Cebu, Philippines.">
+<meta property="og:title" content="Order of the Seven Seas – Sail As One">
+<meta property="og:image" content="logo.jpg">
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#222}
-:root{--navy:#081d3d;--navy2:#0d2a5e;--gold:#d4b26a;--gold2:#f1d27a}
-header{background:radial-gradient(ellipse at center, #0d2a5e 0%, #081d3d 70%);color:white;text-align:center;padding:80px 20px 70px}
-.logo{width:180px;height:180px;border-radius:50%;border:4px solid var(--gold);box-shadow:0 0 40px rgba(212,178,106,.6);background:white;object-fit:cover}
+:root{
+  --navy-900:#040f26; --navy-800:#071a3e; --navy-700:#0b2a63; --navy-600:#123a82;
+  --gold:#d4af5f; --gold-hi:#f3d98b; --gold-lo:#a98234;
+  --ivory:#f7f4ec; --ink:#0c1b3a; --muted:#51607f;
+  --serif:'Cinzel','Times New Roman',serif; --text:'Montserrat',system-ui,sans-serif; --elegant:'Cormorant Garamond',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--text);color:var(--ink);background:var(--ivory);line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold-hi);outline-offset:3px}
+.gold-text{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* VERY GOOD FONT - ROYAL STYLE */
-header h1{
-  font-family:'Cinzel', serif;
-  font-weight:900;
-  font-size:2.8rem;
-  letter-spacing:5px;
-  line-height:1.1;
-  text-shadow:0 3px 10px rgba(0,0,0,.8);
-  background: linear-gradient(to bottom, #fff 40%, #d4b26a 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,box-shadow .3s,padding .3s;padding:14px 0}
+nav.solid{background:rgba(4,15,38,.94);backdrop-filter:blur(10px);box-shadow:0 4px 24px rgba(0,0,0,.35);padding:8px 0}
+.nav-in{max-width:1180px;margin:auto;padding:0 24px;display:flex;align-items:center;gap:28px}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-family:var(--serif);font-weight:700;letter-spacing:.14em;font-size:.95rem}
+.nav-brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold);object-fit:cover}
+.links{margin-left:auto;display:flex;gap:28px;align-items:center}
+.links a{color:#e8ecf7;text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;position:relative;padding:6px 0}
+.links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold);transition:width .25s}
+.links a:hover::after{width:100%}
+.links .join{border:1.5px solid var(--gold);color:var(--gold-hi);padding:9px 20px;border-radius:40px}
+.links .join::after{display:none}
+.links .join:hover{background:var(--gold);color:var(--navy-900)}
+.burger{display:none;margin-left:auto;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:120px 24px 150px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 30%,var(--navy-600) 0%,var(--navy-700) 35%,var(--navy-800) 70%,var(--navy-900) 100%)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:radial-gradient(1.5px 1.5px at 20% 25%,#fff,transparent),radial-gradient(1.5px 1.5px at 75% 18%,#fff,transparent),radial-gradient(1px 1px at 55% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 62%,#fff,transparent),radial-gradient(1px 1px at 10% 78%,#fff,transparent),radial-gradient(1px 1px at 38% 12%,#fff,transparent)}
+.hero-in{position:relative;z-index:2;max-width:820px}
+.logo-wrap{width:clamp(200px,34vw,300px);margin:0 auto 30px;position:relative}
+.logo-wrap::before{content:"";position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(circle,rgba(243,217,139,.38),transparent 68%);animation:pulse 5s ease-in-out infinite}
+.logo-wrap img{position:relative;border-radius:50%;box-shadow:0 0 0 4px rgba(212,175,95,.55),0 22px 60px rgba(0,0,0,.6);animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+@keyframes pulse{50%{opacity:.55;transform:scale(1.06)}}
+.eyebrow{font-weight:600;font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:12px}
+.hero h1{font-family:var(--serif);font-size:clamp(2.2rem,6.4vw,4.4rem);line-height:1.08;letter-spacing:.06em;font-weight:700}
+.motto{font-family:var(--elegant);font-style:italic;font-weight:600;font-size:clamp(1.4rem,3.4vw,2rem);margin:14px 0 18px;letter-spacing:.12em}
+.hero p.sub{max-width:36em;margin:0 auto 34px;font-size:1.02rem;color:#d3dbef}
+.cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;padding:15px 34px;border-radius:50px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold));color:var(--navy-900);box-shadow:0 8px 24px rgba(212,175,95,.35)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(212,175,95,.5)}
+.btn-line{border:2px solid var(--gold);color:var(--gold-hi)}
+.btn-line:hover{background:rgba(212,175,95,.15);transform:translateY(-3px)}
+.waves{position:absolute;left:0;bottom:-1px;width:200%;height:120px;z-index:1;animation:drift 22s linear infinite}
+.waves.b{opacity:.5;height:100px;animation-duration:34s;animation-direction:reverse;bottom:6px}
+@keyframes drift{to{transform:translateX(-50%)}}
+.scroll{position:absolute;bottom:128px;left:50%;transform:translateX(-50%);z-index:2;color:var(--gold-hi);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;opacity:.8}
+
+/* SECTIONS */
+section{padding:96px 24px}
+.wrap{max-width:1100px;margin:auto}
+.head{text-align:center;margin-bottom:54px}
+.head .eyebrow{color:var(--gold-lo)}
+.head h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:.06em;color:var(--navy-800)}
+.rule{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;color:var(--gold)}
+.rule::before,.rule::after{content:"";width:70px;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold))}
+.rule::after{transform:scaleX(-1)}
+
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:34px;align-items:stretch}
+.intro{font-family:var(--elegant);font-size:1.5rem;line-height:1.55;color:var(--navy-800)}
+.mv{display:grid;gap:20px}
+.panel{background:#fff;border-radius:16px;padding:28px 30px;border-top:4px solid var(--gold);box-shadow:0 14px 40px rgba(7,26,62,.1)}
+.panel h3{font-family:var(--serif);letter-spacing:.12em;font-size:1rem;color:var(--gold-lo);margin-bottom:6px}
+.panel p{color:var(--muted);font-size:.97rem}
+
+.values{background:linear-gradient(180deg,var(--navy-800),var(--navy-900));color:#fff}
+.values .head h2{color:#fff}.values .head .eyebrow{color:var(--gold-hi)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
+.vcard{text-align:center;padding:36px 24px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(212,175,95,.35);transition:transform .3s,background .3s,border-color .3s}
+.vcard:hover{transform:translateY(-8px);background:rgba(212,175,95,.1);border-color:var(--gold)}
+.vcard .ic{width:62px;height:62px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;font-size:1.7rem;background:radial-gradient(circle,rgba(243,217,139,.3),rgba(212,175,95,.08));border:1px solid var(--gold)}
+.vcard h3{font-family:var(--serif);letter-spacing:.14em;font-size:1.1rem;color:var(--gold-hi);margin-bottom:6px}
+.vcard p{color:#c6d0e8;font-size:.93rem}
+
+.out-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.out-img{border-radius:20px;overflow:hidden;box-shadow:0 22px 50px rgba(7,26,62,.28);border:4px solid #fff;aspect-ratio:4/3;background:linear-gradient(135deg,var(--navy-700),var(--navy-900));display:grid;place-items:center}
+.out-img img{width:100%;height:100%;object-fit:cover}
+.out-img.empty img{width:55%;height:auto;border-radius:50%;opacity:.95}
+.quote{position:relative;background:var(--navy-800);color:#fff;border-radius:18px;padding:38px 34px 34px;border-left:6px solid var(--gold);font-family:var(--elegant);font-style:italic;font-size:1.6rem;line-height:1.4;margin-bottom:22px}
+.quote::before{content:"“";position:absolute;top:-8px;left:18px;font-size:5rem;line-height:1;color:var(--gold);font-family:var(--serif)}
+.out-p{color:var(--muted)}
+
+.join-sec{background:var(--navy-800);color:#fff;text-align:center;position:relative;overflow:hidden}
+.join-sec::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,175,95,.22),transparent 60%)}
+.join-sec .wrap{position:relative;max-width:760px}
+.join-sec h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:.06em;margin-bottom:14px}
+.join-sec p{color:#cdd6ec;margin-bottom:30px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;margin-bottom:34px;text-align:left}
+.step{background:rgba(255,255,255,.06);border:1px solid rgba(212,175,95,.3);border-radius:14px;padding:18px}
+.step b{font-family:var(--serif);font-size:1.6rem;color:var(--gold)}
+.step span{display:block;font-size:.88rem;color:#d3dbef}
+
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.ccard{background:#fff;border-radius:16px;padding:30px 24px;text-align:center;box-shadow:0 14px 40px rgba(7,26,62,.1);border-bottom:4px solid var(--gold)}
+.ccard .ic{font-size:1.8rem;margin-bottom:6px}
+.ccard h3{font-family:var(--serif);letter-spacing:.12em;font-size:.95rem;color:var(--gold-lo);margin-bottom:4px}
+.ccard p,.ccard a{color:var(--navy-800);font-weight:600;word-break:break-word;text-decoration:none}
+.ccard a:hover{text-decoration:underline}
+
+footer{background:var(--navy-900);color:#9fb0d4;text-align:center;padding:54px 24px 34px;border-top:3px solid var(--gold)}
+footer img{width:80px;height:80px;border-radius:50%;margin:0 auto 14px;border:2px solid var(--gold)}
+footer h3{font-family:var(--serif);letter-spacing:.2em;font-size:1.15rem}
+footer .m{font-family:var(--elegant);font-style:italic;color:var(--gold-hi);font-size:1.3rem;letter-spacing:.14em;margin:4px 0 18px}
+footer small{font-size:.8rem}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:860px){
+  section{padding:70px 20px}
+  .about-grid,.out-grid{grid-template-columns:1fr}
+  .burger{display:block}
+  .links{position:absolute;top:100%;left:0;right:0;background:rgba(4,15,38,.98);flex-direction:column;padding:10px 24px 26px;gap:16px;align-items:flex-start;display:none}
+  .links.open{display:flex}
+  nav{background:rgba(4,15,38,.94)}
+  .nav-brand span{font-size:.8rem}
+  .scroll{display:none}
+  .intro{font-size:1.3rem}
 }
-.motto{
-  font-family:'Montserrat',sans-serif;
-  font-weight:900;
-  letter-spacing:6px;
-  font-size:1.3rem;
-  color:var(--gold2);
-  margin:18px 0;
-  text-shadow:0 2px 5px rgba(0,0,0,.5);
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
 }
-.sub{
-  font-family:'Lora',serif;
-  font-size:1.05rem;
-  color:#c9d6e8;
-  font-weight:400;
-  line-height:1.6;
-}
-.btn{display:inline-block;margin:20px 10px;padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:900;letter-spacing:1px;font-family:'Montserrat',sans-serif;transition:.3s}
-.btn-gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:var(--navy);box-shadow:0 5px 20px rgba(212,178,106,.4)}
-.btn-outline{border:2px solid var(--gold);color:var(--gold)}
-section{max-width:1100px;margin:auto;padding:70px 20px}
-h2{font-family:'Cinzel',serif;font-weight:700;letter-spacing:3px}
-.card{background:white;border-radius:18px;padding:32px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-footer{background:var(--navy);color:#ccc;text-align:center;padding:45px 20px;font-family:'Montserrat',sans-serif}
 </style>
 </head>
 <body>
-<header>
-<img src="logo.jpg" alt="FOSS Logo" class="logo">
-<h1>ORDER OF<br>THE SEVEN<br>SEAS</h1>
-<div class="motto">SAIL AS ONE • FOSS</div>
-<p class="sub">Fraternal Order of the Seven Seas |<br>Maritime Brotherhood, Leadership & Community Platform<br>Est. Cebu, Philippines</p>
-<br>
-<a href="#about" class="btn btn-gold">Explore Our Brotherhood</a>
-<a href="#contact" class="btn btn-outline">Contact Us</a>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a class="nav-brand" href="#top" aria-label="FOSS home">
+      <img src="logo.jpg" alt="FOSS seal"><span>FOSS</span>
+    </a>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <div class="links" id="links">
+      <a href="#about">About</a>
+      <a href="#values">Values</a>
+      <a href="#outreach">Community</a>
+      <a href="#membership">Membership</a>
+      <a href="#contact">Contact</a>
+      <a class="join" href="#membership">Join the Order</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-in">
+    <div class="logo-wrap"><img src="logo.jpg" alt="Seal of the Order of the Seven Seas: anchor and trident over a compass rose"></div>
+    <div class="eyebrow">Fraternal Order of the Seven Seas</div>
+    <h1 class="gold-text">ORDER OF THE SEVEN SEAS</h1>
+    <div class="motto">Sail As One</div>
+    <p class="sub">A maritime brotherhood of principled leaders, anchored in service to humanity. Est. Cebu, Philippines.</p>
+    <div class="cta">
+      <a href="#about" class="btn btn-gold">Explore Our Brotherhood</a>
+      <a href="#contact" class="btn btn-line">Contact Us</a>
+    </div>
+  </div>
+  <div class="scroll">Scroll &#8595;</div>
+  <svg class="waves b" viewBox="0 0 2400 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#123a82" d="M0 50 C200 10 400 90 600 50 S1000 10 1200 50 S1600 90 1800 50 S2200 10 2400 50 V100 H0Z"/></svg>
+  <svg class="waves" viewBox="0 0 2400 120" preserveAspectRatio="none" aria-hidden="true"><path fill="#f7f4ec" d="M0 60 C200 20 400 100 600 60 S1000 20 1200 60 S1600 100 1800 60 S2200 20 2400 60 V120 H0Z"/></svg>
 </header>
+
 <section id="about">
-<h2 style="color:var(--navy);font-size:2rem;text-align:center;margin-bottom:20px">WHO WE ARE</h2>
-<div class="card" style="text-align:center;font-family:'Lora',serif;font-size:1.1rem">
-<p>The <strong style="font-family:'Cinzel',serif">Fraternal Order of the Seven Seas</strong> is anchored in brotherhood, integrity, and service to humanity.</p>
-</div>
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow">Who We Are</div><h2>A Fleet United by Purpose</h2><div class="rule">&#9875;</div></div>
+    <div class="about-grid">
+      <p class="intro rv">The <strong>Fraternal Order of the Seven Seas (FOSS)</strong> is a fraternity anchored in brotherhood, integrity, and service to humanity. Wherever the tide takes us, we sail as one.</p>
+      <div class="mv">
+        <div class="panel rv"><h3>OUR PURPOSE</h3><p>To unite a fleet of good men in one mission &ndash; to serve humanity with humility, uphold honor in leadership, and bring kindness to every shore we reach.</p><p style="margin-top:12px;color:var(--navy-800);font-weight:600">We are not just an order, we are a brotherhood that sails as one.</p></div>
+        <div class="panel rv"><h3>OUR VISION</h3><p>To be a global fleet of principled brothers, united across the seven seas, recognized as a beacon of compassionate leadership and selfless service.</p></div>
+        <div class="panel rv"><h3>OUR MISSION</h3><p>To forge a brotherhood of men of character, to build leaders who serve with humility and integrity, and to uplift communities through kindness and action. <strong style="color:var(--navy-800)">We Sail As One.</strong></p></div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<section class="values" id="values">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow">Our Compass</div><h2>Anchored in Values</h2><div class="rule">&#9733;</div></div>
+    <div class="vgrid">
+      <div class="vcard rv"><div class="ic">&#9875;</div><h3>COMPASSION</h3><p>Serving with heart</p></div>
+      <div class="vcard rv"><div class="ic">&#129309;</div><h3>HUMILITY</h3><p>Leading by serving</p></div>
+      <div class="vcard rv"><div class="ic">&#129517;</div><h3>INTEGRITY</h3><p>True north in all we do</p></div>
+      <div class="vcard rv"><div class="ic">&#127754;</div><h3>BROTHERHOOD</h3><p>One Fleet, One Family</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="outreach">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow">Service Beyond the Shore</div><h2>Community Outreach</h2><div class="rule">&#10022;</div></div>
+    <div class="out-grid">
+      <div class="out-img empty rv" id="outBox"><img src="outreach.jpg" alt="FOSS members during a community outreach activity" id="outImg"></div>
+      <div class="rv">
+        <div class="quote">Be the reason someone believes that goodness still exists in this world.</div>
+        <p class="out-p">We believe that kindness, no matter how small, can create meaningful change. Through reaching out to our communities, supporting those in need, and extending a helping hand, may we keep serving with compassion, humility, and integrity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="join-sec" id="membership">
+  <div class="wrap rv">
+    <div class="eyebrow" style="color:var(--gold-hi);letter-spacing:.42em;font-size:.78rem;font-weight:600;text-transform:uppercase;margin-bottom:10px">Membership</div>
+    <h2 class="gold-text">Join the Fleet</h2>
+    <p>If you share our values of service, humility, and brotherhood, we would be honored to hear from you.</p>
+    <div class="steps">
+      <div class="step"><b>I</b><span>Send us a message with your name and where you are based.</span></div>
+      <div class="step"><b>II</b><span>Get to know our brothers and our community work.</span></div>
+      <div class="step"><b>III</b><span>Take your place in the fleet and sail as one.</span></div>
+    </div>
+    <a class="btn btn-gold" href="mailto:orderofthesevenseas@gmail.com?subject=Membership%20Inquiry">Apply by Email</a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow">Get in Touch</div><h2>Contact</h2><div class="rule">&#9993;</div></div>
+    <div class="contact-grid">
+      <div class="ccard rv"><div class="ic">&#9993;</div><h3>EMAIL</h3><a href="mailto:orderofthesevenseas@gmail.com">orderofthesevenseas@gmail.com</a></div>
+      <div class="ccard rv"><div class="ic">&#128205;</div><h3>LOCATION</h3><p>Cebu, Philippines</p></div>
+      <div class="ccard rv"><div class="ic">&#128172;</div><h3>FACEBOOK</h3><p>Fraternal Order of the Seven Seas - FOSS</p></div>
+    </div>
+  </div>
+</section>
+
 <footer>
-<h3 style="font-family:'Cinzel',serif;color:var(--gold);letter-spacing:3px">ORDER OF THE SEVEN SEAS</h3>
-<p style="color:var(--gold2);font-weight:900;letter-spacing:5px">SAIL AS ONE</p>
+  <img src="logo.jpg" alt="FOSS seal">
+  <h3 class="gold-text">ORDER OF THE SEVEN SEAS</h3>
+  <div class="m">Sail As One</div>
+  <small>&copy; 2026 FOSS &ndash; Fraternal Order of the Seven Seas. All rights reserved.</small>
 </footer>
+
+<script>
+  var nav=document.getElementById('nav'),burger=document.getElementById('burger'),links=document.getElementById('links');
+  function onScroll(){nav.classList.toggle('solid',window.scrollY>40)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  burger.addEventListener('click',function(){var o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');burger.setAttribute('aria-expanded',false)}});
+
+  // Outreach photo: if outreach.jpg is missing, show the seal instead
+  var oi=document.getElementById('outImg'),ob=document.getElementById('outBox');
+  function good(){ob.classList.remove('empty')}
+  function bad(){oi.onerror=null;oi.src='logo.jpg';ob.classList.add('empty')}
+  oi.addEventListener('error',bad);
+  if(oi.complete){oi.naturalWidth?good():bad()} else {oi.addEventListener('load',good)}
+
+  // Scroll reveal
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    els.forEach(function(el,i){el.style.transitionDelay=(i%4)*90+'ms';io.observe(el)});
+  } else {els.forEach(function(el){el.classList.add('in')})}
+</script>
 </body>
 </html>
