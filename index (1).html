@@ -109,6 +109,7 @@ legend{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--n8)
 .fsubmit{width:100%;cursor:pointer;font-family:var(--text);padding:16px}
 .fstatus{display:none;margin-top:18px;padding:16px 18px;border-radius:12px;font-weight:600;font-size:.95rem}
 .fstatus.ok{display:block;background:#e3f6e9;color:#14532d;border:1.5px solid #86d19b}
+.fstatus.err{display:block;background:#fdecec;color:#7f1d1d;border:1.5px solid #f1a3a3}
 .fstatus a{color:inherit;font-weight:700}
 .fnote{font-size:.8rem;color:var(--muted);text-align:center;margin-top:14px}
 
@@ -233,7 +234,11 @@ footer small{font-size:.8rem}
 <section class="apply" id="apply">
   <div class="wrap">
     <div class="head"><div class="eyebrow">Character &bull; Discipline &bull; Service &bull; Brotherhood &bull; Truth</div><h2>Application for Membership</h2></div>
-    <form class="fcard" id="applyForm">
+    <form class="fcard" id="applyForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="43a24775-77e4-433f-bc7a-a5e4b30c5bd5">
+      <input type="hidden" name="subject" value="New FOSS Application - Sail As One!">
+      <input type="hidden" name="from_name" value="FOSS Website">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
       <fieldset>
         <legend>1. Personal Information</legend>
         <div class="fld"><label for="f_name">Full Name</label><input type="text" id="f_name" name="Full Name" required autocomplete="name"></div>
@@ -299,9 +304,9 @@ footer small{font-size:.8rem}
         <div class="fld"><label for="f_sig">Applicant Signature (type your full name)</label><input type="text" id="f_sig" name="Applicant Signature" required></div>
         <div class="fld"><label for="f_date">Date</label><input type="date" id="f_date" name="Date Signed" required></div>
       </div>
-      <button class="btn btn-gold fsubmit" type="submit">Send Application by Email</button>
+      <button class="btn btn-gold fsubmit" type="submit">Submit Application</button>
       <div class="fstatus" id="fstatus" role="status" aria-live="polite"></div>
-      <p class="fnote">Pressing the button opens your email app with your answers filled in. Tap Send to deliver them to the Order.</p>
+      <p class="fnote">Your application is sent privately to the Order&rsquo;s email. We use your details only to process your membership.</p>
     </form>
   </div>
 </section>
@@ -333,20 +338,35 @@ footer small{font-size:.8rem}
   burger.addEventListener('click',function(){var o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
   links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');burger.setAttribute('aria-expanded',false)}});
 
-  // Application form: opens the email app with all answers filled in
+  // Application form (Web3Forms, with email fallback)
   var EMAIL='orderofthesevenseas.ph@gmail.com';
-  var f=document.getElementById('applyForm'),st=document.getElementById('fstatus');
-  var d=new Date();
-  f.elements['Date Signed'].value=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
+  var f=document.getElementById('applyForm'),st=document.getElementById('fstatus'),sb=f.querySelector('button[type=submit]');
+  function today(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+  f.elements['Date Signed'].value=today();
+  function mailto(){
+    var skip={access_key:1,botcheck:1,subject:1,from_name:1},lines=[];
+    new FormData(f).forEach(function(v,k){if(v&&!skip[k])lines.push(k+': '+v)});
+    return 'mailto:'+EMAIL+'?subject='+encodeURIComponent('Membership Application - '+f.elements['Full Name'].value)+'&body='+encodeURIComponent(lines.join('\n'));
+  }
   f.addEventListener('submit',function(e){
     e.preventDefault();
     if(!f.checkValidity()){f.reportValidity();return}
-    var lines=[];
-    new FormData(f).forEach(function(v,k){if(v)lines.push(k+': '+v)});
-    var url='mailto:'+EMAIL+'?subject='+encodeURIComponent('Membership Application - '+f.elements['Full Name'].value)+'&body='+encodeURIComponent(lines.join('\n'));
-    st.className='fstatus ok';
-    st.innerHTML='Almost done! Your email app should open with your application filled in. <b>Tap Send to finish.</b> If nothing opened, <a href="'+url+'">tap here</a>.';
-    window.location.href=url;
+    sb.disabled=true;sb.textContent='Sending...';st.className='fstatus';st.textContent='';
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      .then(function(r){return r.json()})
+      .then(function(j){
+        if(!j||j.success!==true)throw new Error(j&&j.message||'fail');
+        f.reset();f.elements['Date Signed'].value=today();
+        st.className='fstatus ok';
+        st.textContent='Thank you! Your application has been sent. We will get back to you soon. Sail As One!';
+        st.scrollIntoView({behavior:'smooth',block:'center'});
+      })
+      .catch(function(err){
+        console.error(err);
+        st.className='fstatus err';
+        st.innerHTML='Sorry, your application could not be sent automatically. <a href="'+mailto()+'">Tap here to send it by email instead</a> (your answers are filled in).';
+      })
+      .finally(function(){sb.disabled=false;sb.textContent='Submit Application'});
   });
 
   // Lightbox
