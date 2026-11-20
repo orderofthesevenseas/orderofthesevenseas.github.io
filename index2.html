@@ -416,11 +416,10 @@ footer small{font-size:.8rem}
 })();
 </script>
 
-<!-- ===== FIREBASE - LOGIN ONLY ===== -->
+<!-- ===== FIREBASE - LOGIN ONLY - REDIRECT TO MEMBERS PORTAL ===== -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAz9RZ4DDn1qkFx2avJ2_Zusmf72Q0YwQg",
@@ -433,7 +432,6 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 const mMsg = document.getElementById('mMsg');
 const mMainBtn = document.getElementById('mMainBtn');
@@ -445,26 +443,17 @@ mMainBtn.onclick = async () => {
   mMsg.style.color = '#a98234'; mMsg.textContent = 'Loading...';
   try {
     await signInWithEmailAndPassword(auth, email, pass);
+    // pag ok, lilipat na sa members.html
+    window.location.href = "members.html";
   } catch(e){ mMsg.style.color = '#b91c1c'; mMsg.textContent = 'Wrong Email or Password. Contact Admin.'; }
 };
 
 document.getElementById('mLogout').onclick = () => signOut(auth);
 
+// PAG NAKA-LOGIN NA, LIPAT AGAD SA MEMBERS PORTAL
 onAuthStateChanged(auth, async (user) => {
   if(user){
-    document.getElementById('authCard').classList.add('hidden');
-    document.getElementById('dirCard').classList.remove('hidden');
-    try{
-      const snap = await getDocs(collection(db, "users"));
-      let html = '';
-      snap.forEach(d => {
-        const u = d.data();
-        const initial = (u.name || 'F').charAt(0).toUpperCase();
-        html += `<div class="m-item"><div class="m-ava">${initial}</div><div><b>${u.name || 'FOSS Brother'}</b><span>${u.email}</span></div></div>`;
-      });
-      document.getElementById('mList').innerHTML = html || '<p style="text-align:center">Wala pang ibang members.</p>';
-      document.getElementById('mWelcome').textContent = 'Welcome, Brother! You are logged in as ' + user.email;
-    } catch(e){ document.getElementById('mList').innerHTML = 'Error: ' + e.message; }
+    window.location.href = "members.html";
   } else {
     document.getElementById('authCard').classList.remove('hidden');
     document.getElementById('dirCard').classList.add('hidden');
