@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FOSS Members Portal | Sail As One</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--n9:#040f26;--n8:#071a3e;--gold:#d4af5f;--gold-hi:#f3d98b;--ivory:#f7f4ec;--ink:#0c1b3a;--muted:#51607f;--serif:'Cinzel',serif;--text:'Montserrat',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--text);background:var(--ivory);color:var(--ink);line-height:1.7}
+nav{background:var(--n9);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
+nav img{width:40px;height:40px;border-radius:50%;border:2px solid var(--gold);object-fit:cover}
+nav b{font-family:var(--serif);letter-spacing:.15em}
+nav span{margin-left:auto;font-size:.75rem;color:var(--gold-hi);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+nav button{margin-left:10px;background:var(--gold);border:0;padding:8px 16px;border-radius:20px;font-weight:700;cursor:pointer}
+.wrap{max-width:800px;margin:auto;padding:24px 18px 80px}
+h2{font-family:var(--serif);color:var(--n8);letter-spacing:.06em;margin:28px 0 12px;text-align:center}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(7,26,62,.1);border-top:4px solid var(--gold);margin-bottom:16px}
+.card h3{font-family:var(--serif);color:var(--n8);margin-bottom:4px}
+.card small{color:var(--muted)}
+.card p{margin-top:8px}
+.card img.news-img{width:100%;border-radius:12px;margin-top:12px;max-height:320px;object-fit:cover}
+input,textarea{width:100%;padding:12px;border:1.5px solid #c5cfe4;border-radius:10px;font:inherit;margin:6px 0;background:#fbfcff}
+.btn{width:100%;padding:14px;border:0;border-radius:50px;background:linear-gradient(180deg,var(--gold-hi),var(--gold));font-weight:700;letter-spacing:.1em;cursor:pointer}
+.m-item{display:flex;gap:12px;align-items:center;background:#f7f4ec;border:1px solid #e5ddc8;padding:12px;border-radius:12px;margin-bottom:10px}
+.m-ava{width:46px;height:46px;flex-shrink:0;border-radius:50%;background:var(--n8);color:var(--gold-hi);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.2rem}
+.hidden{display:none!important}
+#preview{width:100%;border-radius:12px;margin-top:8px;display:none;max-height:250px;object-fit:cover}
+.delBtn{background:#b91c1c;color:#fff;border:0;padding:6px 14px;border-radius:20px;font-size:.75rem;cursor:pointer;margin-top:10px}
+</style>
+</head>
+<body>
+<nav>
+  <img src="logo.jpg" alt="FOSS"><b>FOSS</b><span id="who">Loading...</span>
+  <button id="logoutBtn">LOGOUT</button>
+</nav>
+<div class="wrap">
+  <h2>⚓ MEMBERS PORTAL</h2>
+  <p style="text-align:center;color:#51607f">Welcome, Brother! Dito mo makikita ang News, Updates, at Directory.</p>
+
+  <h2>📢 NEWS & UPDATES</h2>
+
+  <!-- ADMIN LANG MAKAKAKITA NITO -->
+  <div class="card hidden" id="adminBox">
+    <h3>Mag-post ng Update (Admin Only)</h3>
+    <input id="newsTitle" placeholder="Title - hal. Brigada Eskwela 2026">
+    <textarea id="newsBody" placeholder="Ano yung update? Saan? Kailan?"></textarea>
+    <label style="font-size:.85rem;font-weight:600;color:#0c1b3a">📷 Picture (optional)</label>
+    <input type="file" id="newsImg" accept="image/*">
+    <img id="preview">
+    <button class="btn" id="postBtn">POST UPDATE</button>
+    <p id="postMsg" style="text-align:center;font-size:.85rem;color:green"></p>
+  </div>
+
+  <div id="newsList"><p style="text-align:center">Loading news...</p></div>
+
+  <h2>👥 BROTHERHOOD DIRECTORY</h2>
+  <div id="dirList"><p style="text-align:center">Loading members...</p></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAz9RZ4DDn1qkFx2avJ2_Zusmf72Q0YwQg",
+  authDomain: "foss-members.firebaseapp.com",
+  projectId: "foss-members",
+  storageBucket: "foss-members.firebasestorage.app",
+  messagingSenderId: "486296419855",
+  appId: "1:486296419855:web:c4d95755b99a5211f26d7a",
+  measurementId: "G-RQTE23EPN1"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ===== ILAGAY MO DITO YUNG EMAIL NG ADMIN =====
+// Sino lang pwede mag-post. Dagdagan mo lang pag may bagong Admiral.
+const ADMINS = [
+  "darwingelera@sevenseas.com",
+  "orderofthesevenseas.ph@gmail.com",
+  "admiralaldengalvez@gmail.com"
+];
+
+let myEmail = "";
+let isAdmin = false;
+let imgData = "";
+
+onAuthStateChanged(auth, async (user) => {
+  if(!user){ window.location.href = "index.html#members"; return; }
+  myEmail = user.email.toLowerCase();
+  isAdmin = ADMINS.includes(myEmail);
+  document.getElementById('who').textContent = user.email + (isAdmin ? " • ADMIN" : "");
+  if(isAdmin) document.getElementById('adminBox').classList.remove('hidden');
+  loadNews();
+  loadMembers();
+});
+
+document.getElementById('logoutBtn').onclick = async () => { await signOut(auth); window.location.href = "index.html#members"; };
+
+// Preview ng picture bago i-post
+document.getElementById('newsImg').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    imgData = ev.target.result;
+    const p = document.getElementById('preview');
+    p.src = imgData; p.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
+async function loadNews(){
+  try{
+    const snap = await getDocs(query(collection(db, "news"), orderBy("createdAt", "desc")));
+    let html = "";
+    snap.forEach(d => {
+      const n = d.data();
+      const date = n.createdAt?.toDate ? n.createdAt.toDate().toLocaleString() : "";
+      const img = n.image ? `<img class="news-img" src="${n.image}">` : "";
+      const del = isAdmin ? `<br><button class="delBtn" onclick="window.delNews('${d.id}')">Delete</button>` : "";
+      html += `<div class="card"><small>${date} • ${n.author || ""}</small><h3>${n.title || ""}</h3><p>${n.body || ""}</p>${img}${del}</div>`;
+    });
+    document.getElementById('newsList').innerHTML = html || "<p style='text-align:center'>Wala pang news.</p>";
+  }catch(e){ document.getElementById('newsList').innerHTML = "Error: " + e.message; }
+}
+
+window.delNews = async (id) => {
+  if(!confirm("Delete this news?")) return;
+  await deleteDoc(doc(db, "news", id));
+  loadNews();
+};
+
+async function loadMembers(){
+  try{
+    const snap = await getDocs(collection(db, "users"));
+    let html = "";
+    snap.forEach(d => {
+      const u = d.data();
+      const initial = (u.name || "F").charAt(0).toUpperCase();
+      html += `<div class="m-item"><div class="m-ava">${initial}</div><div><b>${u.name || "FOSS Brother"}</b><br><span style="font-size:.85rem;color:#51607f">${u.email}</span></div></div>`;
+    });
+    document.getElementById('dirList').innerHTML = html || "Wala pang members.";
+  }catch(e){ document.getElementById('dirList').innerHTML = "Error: " + e.message; }
+}
+
+document.getElementById('postBtn').onclick = async () => {
+  if(!isAdmin) return;
+  const title = document.getElementById('newsTitle').value.trim();
+  const body = document.getElementById('newsBody').value.trim();
+  if(!title || !body){ alert("Lagyan mo ng Title at Update!"); return; }
+  document.getElementById('postMsg').textContent = "Posting...";
+  await addDoc(collection(db, "news"), { title, body, image: imgData, author: myEmail, createdAt: serverTimestamp() });
+  document.getElementById('newsTitle').value = "";
+  document.getElementById('newsBody').value = "";
+  document.getElementById('newsImg').value = "";
+  document.getElementById('preview').style.display = 'none';
+  imgData = "";
+  document.getElementById('postMsg').textContent = "Posted! Sail As One!";
+  loadNews();
+};
+</script>
+</body>
+</html>
