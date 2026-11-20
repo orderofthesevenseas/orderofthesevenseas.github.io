@@ -38,10 +38,7 @@ input,textarea{width:100%;padding:12px;border:1.5px solid #c5cfe4;border-radius:
 <div class="wrap">
   <h2>⚓ MEMBERS PORTAL</h2>
   <p style="text-align:center;color:#51607f">Welcome, Brother! Dito mo makikita ang News, Updates, at Directory.</p>
-
   <h2>📢 NEWS & UPDATES</h2>
-
-  <!-- ADMIN LANG MAKAKAKITA NITO -->
   <div class="card hidden" id="adminBox">
     <h3>Mag-post ng Update (Admin Only)</h3>
     <input id="newsTitle" placeholder="Title - hal. Brigada Eskwela 2026">
@@ -52,18 +49,14 @@ input,textarea{width:100%;padding:12px;border:1.5px solid #c5cfe4;border-radius:
     <button class="btn" id="postBtn">POST UPDATE</button>
     <p id="postMsg" style="text-align:center;font-size:.85rem;color:green"></p>
   </div>
-
   <div id="newsList"><p style="text-align:center">Loading news...</p></div>
-
   <h2>👥 BROTHERHOOD DIRECTORY</h2>
   <div id="dirList"><p style="text-align:center">Loading members...</p></div>
 </div>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyAz9RZ4DDn1qkFx2avJ2_Zusmf72Q0YwQg",
   authDomain: "foss-members.firebaseapp.com",
@@ -76,21 +69,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
-// ===== ILAGAY MO DITO YUNG EMAIL NG ADMIN =====
-// Sino lang pwede mag-post. Dagdagan mo lang pag may bagong Admiral.
 const ADMINS = [
   "darwingelera@sevenseas.com",
   "orderofthesevenseas.ph@gmail.com",
   "admiralaldengalvez@gmail.com"
 ];
-
 let myEmail = "";
 let isAdmin = false;
 let imgData = "";
-
 onAuthStateChanged(auth, async (user) => {
-  if(!user){ window.location.href = "index.html#members"; return; }
+  if(!user){ window.location.href = "index2.html"; return; }
   myEmail = user.email.toLowerCase();
   isAdmin = ADMINS.includes(myEmail);
   document.getElementById('who').textContent = user.email + (isAdmin ? " • ADMIN" : "");
@@ -98,10 +86,7 @@ onAuthStateChanged(auth, async (user) => {
   loadNews();
   loadMembers();
 });
-
-document.getElementById('logoutBtn').onclick = async () => { await signOut(auth); window.location.href = "index.html#members"; };
-
-// Preview ng picture bago i-post
+document.getElementById('logoutBtn').onclick = async () => { await signOut(auth); window.location.href = "index2.html"; };
 document.getElementById('newsImg').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if(!file) return;
@@ -113,7 +98,6 @@ document.getElementById('newsImg').addEventListener('change', (e) => {
   };
   reader.readAsDataURL(file);
 });
-
 async function loadNews(){
   try{
     const snap = await getDocs(query(collection(db, "news"), orderBy("createdAt", "desc")));
@@ -128,13 +112,11 @@ async function loadNews(){
     document.getElementById('newsList').innerHTML = html || "<p style='text-align:center'>Wala pang news.</p>";
   }catch(e){ document.getElementById('newsList').innerHTML = "Error: " + e.message; }
 }
-
 window.delNews = async (id) => {
   if(!confirm("Delete this news?")) return;
   await deleteDoc(doc(db, "news", id));
   loadNews();
 };
-
 async function loadMembers(){
   try{
     const snap = await getDocs(collection(db, "users"));
@@ -147,7 +129,6 @@ async function loadMembers(){
     document.getElementById('dirList').innerHTML = html || "Wala pang members.";
   }catch(e){ document.getElementById('dirList').innerHTML = "Error: " + e.message; }
 }
-
 document.getElementById('postBtn').onclick = async () => {
   if(!isAdmin) return;
   const title = document.getElementById('newsTitle').value.trim();
