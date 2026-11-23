@@ -357,9 +357,36 @@ footer small{font-size:.8rem}
     <div class="contact-grid">
       <div class="ccard"><div class="ic">&#9993;</div><h3>EMAIL</h3><a href="mailto:orderofthesevenseas.ph@gmail.com">orderofthesevenseas.ph@gmail.com</a></div>
       <div class="ccard"><div class="ic">&#9875;</div><h3>LUZON FLEET</h3><a href="mailto:admiralaldengalvez@gmail.com">admiralaldengalvez@gmail.com</a></div>
+      <div class="ccard"><div class="ic">&#9875;</div><h3>VISAYAS FLEET</h3><p>Fleet Admiral Demetrio Cabalhin Jr.</p><p style="font-size:.85rem;color:#51607f">Capiz, Western Visayas</p></div>
       <div class="ccard"><div class="ic">&#128205;</div><h3>LOCATION</h3><p>Cebu, Philippines</p></div>
       <div class="ccard"><div class="ic">&#128172;</div><h3>FACEBOOK</h3><a href="https://www.facebook.com/share/1EmkndUJoc/" target="_blank" rel="noopener">Fraternal Order of the Seven Seas - FOSS</a></div>
     </div>
+
+    <!-- ===== VISAYAS FLEET - CONTACT FORM ===== -->
+    <form class="fcard" id="visayasContactForm" action="https://api.web3forms.com/submit" method="POST" style="margin-top:30px">
+      <input type="hidden" name="access_key" value="47b9a664-5a9d-4c40-b99b-cec7a8695ec8">
+      <input type="hidden" name="subject" value="New Message for Visayas Fleet - FOSS">
+      <input type="hidden" name="from_name" value="FOSS Visayas Fleet Website">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+      <legend>Message Visayas Fleet</legend>
+      <div class="fld">
+        <label for="v_name">Name</label>
+        <input type="text" id="v_name" name="name" required autocomplete="name" placeholder="Your full name">
+      </div>
+      <div class="fld">
+        <label for="v_email">Email</label>
+        <input type="email" id="v_email" name="email" required autocomplete="email" placeholder="Your email">
+      </div>
+      <div class="fld">
+        <label for="v_msg">Message</label>
+        <textarea id="v_msg" name="message" required placeholder="Message for Fleet Admiral Demetrio Cabalhin Jr. - Visayas Fleet..."></textarea>
+      </div>
+      <button class="btn btn-gold fsubmit" type="submit">Send to Visayas Fleet</button>
+      <div class="fstatus" id="visayasStatus" role="status" aria-live="polite"></div>
+      <p class="fnote">Your message goes directly to Visayas Fleet. Sail As One!</p>
+    </form>
+    <!-- ===== END VISAYAS FORM ===== -->
+
   </div>
 </section>
 <footer>
@@ -392,7 +419,7 @@ footer small{font-size:.8rem}
   var MAIN_KEY='43a24775-77e4-433f-bc7a-a5e4b30c5bd5';
   var FLEETS={
     luzon:{name:'Luzon Fleet',email:'admiralaldengalvez@gmail.com',key:'3e8eb720-a4e6-42f9-a655-e654d6d331e6'},
-    visayas:{name:'Visayas Fleet',email:'',key:''},
+    visayas:{name:'Visayas Fleet',email:'',key:'47b9a664-5a9d-4c40-b99b-cec7a8695ec8'},
     mindanao:{name:'Mindanao Fleet',email:'',key:''}
   };
   function fleet(){return FLEETS[f.elements['Fleet Applied To'].value]||{}}
@@ -408,10 +435,10 @@ footer small{font-size:.8rem}
     e.preventDefault();
     if(!f.checkValidity()){f.reportValidity();return}
     var fl=fleet();
-    if(f.elements['Fleet Applied To'].value==='luzon'){
+    if(fl.key){
       f.elements['access_key'].value=fl.key;
     } else {
-      f.elements['access_key'].value=fl.key||MAIN_KEY;
+      f.elements['access_key'].value=MAIN_KEY;
     }
     f.elements['subject'].value='New FOSS Application ('+(fl.name||'Fleet')+') - Sail As One!';
     sb.disabled=true;sb.textContent='Sending...';st.className='fstatus';st.textContent='';
@@ -431,6 +458,33 @@ footer small{font-size:.8rem}
       })
       .finally(function(){sb.disabled=false;sb.textContent='Submit Application'});
   });
+
+  // ===== VISAYAS CONTACT FORM =====
+  var vf=document.getElementById('visayasContactForm');
+  if(vf){
+    var vs=document.getElementById('visayasStatus');
+    var vb=vf.querySelector('button[type=submit]');
+    vf.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!vf.checkValidity()){vf.reportValidity();return}
+      vb.disabled=true; vb.textContent='Sending...'; vs.className='fstatus'; vs.textContent='';
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(vf)})
+        .then(function(r){return r.json()})
+        .then(function(j){
+          if(!j||j.success!==true) throw new Error('fail');
+          vf.reset();
+          vs.className='fstatus ok';
+          vs.textContent='Thank you! Your message has been sent to Visayas Fleet. Sail As One!';
+          vs.scrollIntoView({behavior:'smooth',block:'center'});
+        })
+        .catch(function(){
+          vs.className='fstatus err';
+          vs.textContent='Sorry, could not send. Please try again.';
+        })
+        .finally(function(){vb.disabled=false; vb.textContent='Send to Visayas Fleet'});
+    });
+  }
+
   var lb=document.getElementById('lb'),li=document.getElementById('lbImg');
   document.querySelectorAll('.gbtn').forEach(function(bt){
     bt.addEventListener('click',function(){var im=bt.querySelector('img');li.src=im.src;li.alt=im.alt;lb.classList.add('open')});
