@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>FOSS – Fraternal Order of the Seven Seas | Sail As One</title>
 <meta name="description" content="The Fraternal Order of the Seven Seas (FOSS): a maritime brotherhood anchored in compassion, humility, integrity, and service. Est. Cebu, Philippines.">
 <meta property="og:title" content="Order of the Seven Seas – Sail As One">
@@ -11,9 +12,9 @@
 <link rel="icon" href="logo.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--n9:#040f26;--n8:#071a3e;--n7:#0b2a63;--gold:#d4af5f;--gold-hi:#f3d98b;--gold-lo:#a98234;--ivory:#f7f4ec;--ink:#0c1b3a;--muted:#51607f;--serif:'Cinzel','Times New Roman',serif;--text:'Montserrat',system-ui,sans-serif}
+:root{color-scheme:light;--n9:#040f26;--n8:#071a3e;--n7:#0b2a63;--gold:#d4af5f;--gold-hi:#f3d98b;--gold-lo:#a98234;--ivory:#f7f4ec;--ink:#0c1b3a;--muted:#51607f;--serif:'Cinzel','Times New Roman',serif;--text:'Montserrat',system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
+html{scroll-behavior:smooth;scroll-padding-top:76px;background:#f7f4ec}
 body{font-family:var(--text);color:var(--ink);background:var(--ivory);line-height:1.7;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -94,15 +95,15 @@ section{padding:90px 24px}
 .step b{font-family:var(--serif);font-size:1.5rem;color:var(--gold)}
 .step span{display:block;font-size:.88rem;color:#d3dbef}
 .apply{background:linear-gradient(180deg,var(--ivory),#e9eef8)}
-.fcard{max-width:880px;margin:auto;background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(7,26,62,.14);border-top:6px solid var(--gold);padding:38px}
+.fcard{max-width:880px;margin:auto;background:#fff !important;border-radius:18px;box-shadow:0 20px 50px rgba(7,26,62,.14);border-top:6px solid var(--gold);padding:38px;color:#0c1b3a}
 fieldset{border:0;margin:0 0 24px;min-width:0}
 legend{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--n8);padding:0 0 6px;border-bottom:2px solid var(--gold);margin-bottom:18px;width:100%}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
 .fld{display:flex;flex-direction:column;margin-bottom:16px}
-.fld>label,.fld>.lbl{font-weight:600;font-size:.82rem;color:var(--n8);margin-bottom:6px}
-.fcard input[type=text],.fcard input[type=email],.fcard input[type=tel],.fcard input[type=number],.fcard input[type=date],.fcard textarea{font:inherit;font-size:1rem;padding:12px 14px;border:1.5px solid #c5cfe4;border-radius:10px;background:#fbfcff;color:var(--ink);width:100%}
+.fld>label,.fld>.lbl{font-weight:600;font-size:.82rem;color:#071a3e !important;margin-bottom:6px}
+.fcard input[type=text],.fcard input[type=email],.fcard input[type=tel],.fcard input[type=number],.fcard input[type=date],.fcard textarea{font:inherit;font-size:1rem;padding:12px 14px;border:1.5px solid #c5cfe4;border-radius:10px;background:#fbfcff !important;color:#0c1b3a !important;width:100%}
 .fcard textarea{min-height:100px;resize:vertical}
-.fcard select{font:inherit;font-size:1rem;padding:12px 14px;border:1.5px solid #c5cfe4;border-radius:10px;background:#fbfcff;color:var(--ink);width:100%}
+.fcard select{font:inherit;font-size:1rem;padding:12px 14px;border:1.5px solid #c5cfe4;border-radius:10px;background:#fbfcff !important;color:#0c1b3a !important;width:100%}
 .opts{display:flex;gap:10px 22px;flex-wrap:wrap;padding-top:4px}
 .opts label{display:flex;gap:8px;align-items:center;font-size:.95rem;cursor:pointer}
 .opts input,.agree input{width:20px;height:20px;accent-color:var(--n7)}
@@ -131,10 +132,10 @@ footer small{font-size:.8rem}
 .members-sec{background:linear-gradient(180deg,var(--n8),var(--n9));color:#fff}
 .members-sec .head h2{color:#fff}
 .members-sec .head .eyebrow{color:var(--gold-hi)}
-.m-card{max-width:520px;margin:0 auto;background:#fff;color:var(--ink);border-radius:18px;padding:32px;border-top:6px solid var(--gold);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.m-card{max-width:520px;margin:0 auto;background:#fff !important;color:var(--ink);border-radius:18px;padding:32px;border-top:6px solid var(--gold);box-shadow:0 20px 50px rgba(0,0,0,.4)}
 .m-card h3{font-family:var(--serif);text-align:center;color:var(--n8);letter-spacing:.08em;margin-bottom:6px}
 .m-card p.m-sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:18px}
-.m-card input{width:100%;padding:13px 14px;margin:7px 0;border:1.5px solid #c5cfe4;border-radius:10px;font:inherit;background:#fbfcff}
+.m-card input{width:100%;padding:13px 14px;margin:7px 0;border:1.5px solid #c5cfe4;border-radius:10px;font:inherit;background:#fbfcff !important;color:#0c1b3a !important}
 .m-card input:focus{border-color:var(--gold);outline:none}
 #mMsg{text-align:center;font-size:.9rem;min-height:20px;color:#b91c1c;font-weight:600}
 .m-list{display:grid;gap:12px;margin-top:18px}
@@ -362,30 +363,30 @@ footer small{font-size:.8rem}
       <div class="ccard"><div class="ic">&#128172;</div><h3>FACEBOOK</h3><a href="https://www.facebook.com/share/1EmkndUJoc/" target="_blank" rel="noopener">Fraternal Order of the Seven Seas - FOSS</a></div>
     </div>
 
-    <!-- ===== VISAYAS FLEET - CONTACT FORM - BAGO NA - cea9afc4 ===== -->
-    <form class="fcard" id="visayasContactForm" action="https://api.web3forms.com/submit" method="POST" style="margin-top:30px">
-      <input type="hidden" name="access_key" value="cea9afc4-0ee4-422e-9226-5d894a423ba6">
-      <input type="hidden" name="subject" value="New Message for Visayas Fleet - FOSS">
-      <input type="hidden" name="from_name" value="FOSS Visayas Fleet Website">
+    <!-- ===== ISA LANG NA CONTACT FORM - MAIN ===== -->
+    <form class="fcard" id="mainContactForm" action="https://api.web3forms.com/submit" method="POST" style="margin-top:30px">
+      <input type="hidden" name="access_key" value="43a24775-77e4-433f-bc7a-a5e4b30c5bd5">
+      <input type="hidden" name="subject" value="New Message from FOSS Website - Contact">
+      <input type="hidden" name="from_name" value="FOSS Website Contact">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-      <legend>Message Visayas Fleet</legend>
+      <legend>Send Us a Message</legend>
       <div class="fld">
-        <label for="v_name">Name</label>
-        <input type="text" id="v_name" name="name" required autocomplete="name" placeholder="Your full name">
+        <label for="c_name">Name</label>
+        <input type="text" id="c_name" name="name" required autocomplete="name" placeholder="Your full name">
       </div>
       <div class="fld">
-        <label for="v_email">Email</label>
-        <input type="email" id="v_email" name="email" required autocomplete="email" placeholder="Your email">
+        <label for="c_email">Email</label>
+        <input type="email" id="c_email" name="email" required autocomplete="email" placeholder="Your email">
       </div>
       <div class="fld">
-        <label for="v_msg">Message</label>
-        <textarea id="v_msg" name="message" required placeholder="Message for Fleet Admiral Demetrio Cabalhin Jr. - Visayas Fleet..."></textarea>
+        <label for="c_msg">Message</label>
+        <textarea id="c_msg" name="message" required placeholder="Your message..."></textarea>
       </div>
-      <button class="btn btn-gold fsubmit" type="submit">Send to Visayas Fleet</button>
-      <div class="fstatus" id="visayasStatus" role="status" aria-live="polite"></div>
-      <p class="fnote">Your message goes directly to Visayas Fleet. Sail As One!</p>
+      <button class="btn btn-gold fsubmit" type="submit">Send Message</button>
+      <div class="fstatus" id="mainContactStatus" role="status" aria-live="polite"></div>
+      <p class="fnote">Your message goes to our main FOSS email. Sail As One!</p>
     </form>
-    <!-- ===== END VISAYAS FORM ===== -->
+    <!-- ===== END CONTACT FORM ===== -->
 
   </div>
 </section>
@@ -397,7 +398,6 @@ footer small{font-size:.8rem}
   <small>&copy; 2026 FOSS &ndash; Fraternal Order of the Seven Seas. All rights reserved.</small>
 </footer>
 <div class="lb" id="lb" role="dialog" aria-label="Photo viewer"><button type="button" aria-label="Close">&times;</button><img id="lbImg" alt=""></div>
-<!-- LOGIN POPUP SA TAAS -->
 <div class="login-modal" id="loginModal">
   <div class="login-box">
     <h3>MEMBER LOGIN</h3>
@@ -459,29 +459,29 @@ footer small{font-size:.8rem}
       .finally(function(){sb.disabled=false;sb.textContent='Submit Application'});
   });
 
-  // ===== VISAYAS CONTACT FORM =====
-  var vf=document.getElementById('visayasContactForm');
-  if(vf){
-    var vs=document.getElementById('visayasStatus');
-    var vb=vf.querySelector('button[type=submit]');
-    vf.addEventListener('submit',function(e){
+  // ===== MAIN CONTACT FORM - ISA LANG =====
+  var cf=document.getElementById('mainContactForm');
+  if(cf){
+    var cs=document.getElementById('mainContactStatus');
+    var cb=cf.querySelector('button[type=submit]');
+    cf.addEventListener('submit',function(e){
       e.preventDefault();
-      if(!vf.checkValidity()){vf.reportValidity();return}
-      vb.disabled=true; vb.textContent='Sending...'; vs.className='fstatus'; vs.textContent='';
-      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(vf)})
+      if(!cf.checkValidity()){cf.reportValidity();return}
+      cb.disabled=true; cb.textContent='Sending...'; cs.className='fstatus'; cs.textContent='';
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(cf)})
         .then(function(r){return r.json()})
         .then(function(j){
           if(!j||j.success!==true) throw new Error('fail');
-          vf.reset();
-          vs.className='fstatus ok';
-          vs.textContent='Thank you! Your message has been sent to Visayas Fleet. Sail As One!';
-          vs.scrollIntoView({behavior:'smooth',block:'center'});
+          cf.reset();
+          cs.className='fstatus ok';
+          cs.textContent='Thank you! Your message has been sent. Sail As One!';
+          cs.scrollIntoView({behavior:'smooth',block:'center'});
         })
         .catch(function(){
-          vs.className='fstatus err';
-          vs.textContent='Sorry, could not send. Please try again.';
+          cs.className='fstatus err';
+          cs.textContent='Sorry, could not send. Please try again.';
         })
-        .finally(function(){vb.disabled=false; vb.textContent='Send to Visayas Fleet'});
+        .finally(function(){cb.disabled=false; cb.textContent='Send Message'});
     });
   }
 
@@ -492,7 +492,6 @@ footer small{font-size:.8rem}
   function close(){lb.classList.remove('open')}
   lb.addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
-  // TOP LOGIN POPUP
   var topModal=document.getElementById('loginModal');
   document.getElementById('topLoginBtn').onclick=function(){topModal.classList.add('open')};
   document.getElementById('topLoginClose').onclick=function(){topModal.classList.remove('open')};
